@@ -84,6 +84,14 @@ function download() {
     echo
     echo.Cyan "Downloading $TYPE NRD list ..."
 
+
+    if [ "free" = "$TYPE" ] && [ "$DAY_RANGE" -gt "10" ]; then
+        echo.Red "Warning! Free NRD list before more than 10 days might be removed from WhoisDS.com already, the download may failed."
+    fi
+    if [ "paid" = "$TYPE" ] && [ "$DAY_RANGE" -gt "30" ]; then
+        echo.Red "Warning! Paid NRD list before more than 30 days might be removed from WhoisDS.com already, the download may failed."
+    fi
+
     while [ "$i" -gt "0" ]; do
         DATE="$(date -u --date "$i days ago" '+%Y-%m-%d')"
         FILE="${DOWNLOAD_DIR}/${DATE}"
