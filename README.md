@@ -1,6 +1,6 @@
 # nrd-list-downloader
 
-nrd-list-downloader is a shell script that automatically downloads, decompresses, and aggregates Newly Registered Domain (NRD) lists from [WhoisDS.com](https://www.whoisds.com/newly-registered-domains). The aggregated NRD lists can be easily used with popular domain blocking tools like [Pi-Hole][Pi-Hole], [AdGuard Home][AdGuard Home], and [Blocky][Blocky] to enhance your network security.
+nrd-list-downloader is a shell script that automatically downloads, decompresses, and aggregates Newly Registered Domain (NRD) lists from [WhoisDS.com](https://www.whoisds.com/newly-registered-domains). The aggregated NRD lists can be easily used with popular domain blocking tools like [Pi-Hole][Pi-Hole], [AdGuard Home](https://github.com/AdguardTeam/AdGuardHome), and [Blocky][Blocky] to enhance your network security.
 
 ## What are Newly Registered Domains (NRDs)?
 
