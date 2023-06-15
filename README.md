@@ -131,7 +131,7 @@ Quoted from <https://www.whoisds.com/newly-registered-domains>:
 GPL-3.0 (GNU GENERAL PUBLIC LICENSE Version 3)
 
 [Pi-Hole]: https://pi-hole.net/
-[AdGuard Home]: https://pi-hole.net/
+[AdGuard Home]: https://github.com/AdguardTeam/AdguardHome
 [Blocky]: https://0xerr0r.github.io/blocky
 [threat-hostlist]: https://github.com/PeterDaveHello/threat-hostlist
 [Domain Parking Wikipedia]: (https://en.wikipedia.org/wiki/Domain_parking)
