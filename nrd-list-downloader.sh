@@ -22,15 +22,15 @@
 # Copyright (C) 2015 ~ Peter Dave Hello
 
 function echo.Red() {
-  echo -e "\\033[31m$*\\033[m"
+    echo -e "\\033[31m$*\\033[m"
 }
 
 function echo.Green() {
-  echo -e "\\033[32m$*\\033[m"
+    echo -e "\\033[32m$*\\033[m"
 }
 
 function echo.Cyan() {
-  echo -e "\\033[36m$*\\033[m"
+    echo -e "\\033[36m$*\\033[m"
 }
 # ColorEchoForShell End #
 
@@ -93,7 +93,7 @@ function download() {
         local DATE FILE URL FREE_URL_INFIX
         DATE="$(date -u --date "$i days ago" '+%Y-%m-%d')"
         FILE="${DOWNLOAD_DIR}/${DATE}"
-        if [ -s "$FILE" ] && [ "$(grep -vc '^$' "$FILE")" -ge "1" ] ; then
+        if [ -s "$FILE" ] && [ "$(grep -vc '^$' "$FILE")" -ge "1" ]; then
             echo.Cyan "$FILE existed with $(grep -vc '^$' "$FILE") domains, skip the download and decompress process ..."
         else
             printf "%s" "Download and decompress $DATE data ... "
