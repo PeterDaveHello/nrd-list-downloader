@@ -1,0 +1,66 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  schedule:
+    - cron: '0 3 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+  checks: write
+  statuses: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Run Super-Linter (ShellCheck + shfmt)
+        uses: github/super-linter/slim@v7
+        env:
+          VALIDATE_ALL_CODEBASE: true
+          DEFAULT_BRANCH: master
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_BASH: true
+          VALIDATE_BASH_SHFMT: true
+          BASH_SHFMT_ARGS: "-i 4 -ci -sr"
+
+      - name: Smoke test (DAY_RANGE=0)
+        timeout-minutes: 5
+        env:
+          DAY_RANGE: "0"
+        run: ./nrd-list-downloader.sh
+
+      - name: One-day download (DAY_RANGE=1)
+        timeout-minutes: 10
+        env:
+          DAY_RANGE: "1"
+        run: ./nrd-list-downloader.sh
+
+      - name: Verify one-day download count
+        run: |
+          set -euo pipefail
+          file="nrd-1days-free.txt"
+          if [ ! -f "$file" ]; then
+            echo "::error::Expected $file not found"
+            exit 1
+          fi
+          count=$(grep -cvE '^(#|$)' "$file")
+          echo "Domains downloaded: $count"
+          if [ "$count" -lt 1000 ]; then
+            echo "::error::Expected at least 1000 domains, got $count"
+            exit 1
+          fi
